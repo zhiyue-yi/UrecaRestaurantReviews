@@ -1,0 +1,23 @@
+<!-- LandingPanel.html -->
+<!-- panel template for the landing screen -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'webapp/css/LandingPanel.css' %}">
+<div class="jumbotron jumbotron-fluid panel landing-panel shadow" style="background-image: url('{% static 'webapp/assets/landing-screen-banner.jpg' %}')"></div>
+<div class="jumbotron jumbotron-fluid panel landing-panel-overlay shadow"></div>
+<div class="jumbotron jumbotron-fluid panel content-panel shadow">
+    <div class="container content-panel-wrapper">
+        {% include "webapp/component/AppBar.html" %}
+        <div class="container content-panel-container">
+            <h1 class="header content-header">Waiting in NTU and feeling hungry?</h1>
+            <h2 class="header content-subheader">Browse your cravings today!</h2>
+            <div class="row justify-content-center content-search-container">
+                <div class="input-group input-group-lg content-search">
+                    <input type="text" class="form-control input-text-search" placeholder="Looking for restaurants? Or somewhere to dine?" />
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary btn-search" type="button">Show Me</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

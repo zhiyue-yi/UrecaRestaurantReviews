@@ -1,0 +1,18 @@
+<!-- AppBar.html -->
+<!-- app bar template for the web application -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'webapp/css/AppBar.css' %}">
+<nav class="navbar navbar-expand-sm">
+    <a class="navbar-brand navbar-brand-title" href="#">
+        NTU Food Hunter
+    </a>
+    <button class="navbar-toggler navbar-toggler-btn" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false">
+        <span class="fas fa-bars"></span>
+    </button>
+    <div class="collapse navbar-collapse navbar-separator" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto navbar-items">
+            <li class="nav-item"><a class="nav-link" href="#">Restaurants</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Food Courts</a></li>
+        </ul>
+    </div>
+</nav>

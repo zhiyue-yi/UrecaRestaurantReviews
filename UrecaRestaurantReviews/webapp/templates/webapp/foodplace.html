@@ -1,0 +1,346 @@
+{% extends "webapp/base.html" %}
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'webapp/css/foodplace.css' %}" />
+{% endblock stylesheets %}}
+
+{% block content %}
+{% include "webapp/component/AppBarMain.html" %}
+<div class="container-fluid container-loc">
+    <div class="container container-loc-content shadow">
+        <div class="row">
+            <div class="col-md">
+                <div id="foodplaceSlider" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner carousel-inner-foodplace">
+                        <div class="carousel-item carousel-foodplace-img-wrapper active">
+                            <img src="{% static 'webapp/assets/carousel-1.jpg' %}" class="d-block w-100" alt="" />
+                        </div>
+                        <div class="carousel-item carousel-foodplace-img-wrapper">
+                            <img src="{% static 'webapp/assets/carousel-2.jpg' %}" class="d-block w-100" alt="" />
+                        </div>
+                        <div class="carousel-item carousel-foodplace-img-wrapper">
+                            <img src="{% static 'webapp/assets/carousel-3.jpg' %}" class="d-block w-100" alt="" />
+                        </div>
+                    </div>
+                    <div class="carousel-control-prev" href="#foodplaceSlider" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </div> 
+                    <div class="carousel-control-next" href="#foodplaceSlider" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </div> 
+                </div>
+            </div>
+            <div class="col-md foodplace-info-brief-container">
+                <h1 class="foodplace-info-name">Co-op @ NTU Cafe</h1>
+                <div class="container foodplace-info-container">
+                    <div class="row foodplace-info-label">
+                        <div class="col-2">
+                            <i class="fas fa-map-marker-alt" style="font-size: 1.25em; color: #c62828;"></i>
+                        </div>
+                        <div class="col-10">
+                            <h5>50 Nanyang Avenue Singapore 639798</h5>
+                        </div>
+                    </div>
+                    <div class="row foodplace-info-label">
+                        <div class="col-2">
+                            <i class="fas fa-thumbtack" style="font-size: 1.25em; color: #1976d2;"></i>
+                        </div>
+                        <div class="col-10">
+                            <h5>Hall 1</h5>
+                        </div>
+                    </div>
+                    <div class="row foodplace-info-label">
+                        <div class="col-2">
+                            <i class="fas fa-phone" style="font-size: 1.25em; color: #388e3c;"></i>
+                        </div>
+                        <div class="col-10">
+                            <h5>+65 6334 3033</h5>
+                        </div>
+                    </div>
+                    <div class="row foodplace-info-label">
+                        <div class="col-2">
+                            <i class="fas fa-clock" style="font-size: 1.25em; color: #616161;"></i>
+                        </div>
+                        <div class="col-10">
+                            <h5>Daily: 7am to 9pm</h5>
+                        </div>
+                    </div>
+                    <div class="row foodplace-info-label">
+                        <div class="col-2">
+                            <i class="fas fa-chair" style="font-size: 1.25em; color: #616161;"></i>
+                        </div>
+                        <div class="col-10">
+                            <h5>293 Seats</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row foodplace-info-menu">
+            <div class="col-12">
+                <h5 class="foodplace-info-section-title">
+                    <i class="fas fa-utensils"></i>
+                    Menu
+                </h5>
+            </div>
+            <div class="col-12">
+                <div class="row foodplace-menu-item-list">
+                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
+                        <h5 class="foodplace-menu-item-name">Min 5 Pcs With Noodle / Rice</h5>
+                        <h3 class="foodplace-menu-item-price">$3.00</h3>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
+                        <h5 class="foodplace-menu-item-name">Sichuan Veg Ban Mian</h5>
+                        <h3 class="foodplace-menu-item-price">$3.00</h3>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
+                        <h5 class="foodplace-menu-item-name">Sliced Fish Ban Mian</h5>
+                        <h3 class="foodplace-menu-item-price">$3.00</h3>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
+                        <h5 class="foodplace-menu-item-name">Fish Soup</h5>
+                        <h3 class="foodplace-menu-item-price">$3.00</h3>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
+                        <h5 class="foodplace-menu-item-name">Sliced Fish Bee Hoon</h5>
+                        <h3 class="foodplace-menu-item-price">$3.00</h3>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
+                        <h5 class="foodplace-menu-item-name">Fried Fish Bee Hoon</h5>
+                        <h3 class="foodplace-menu-item-price">$3.00</h3>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
+                        <h5 class="foodplace-menu-item-name">Steamed Dumpling (6pcs)</h5>
+                        <h3 class="foodplace-menu-item-price">$3.00</h3>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
+                        <h5 class="foodplace-menu-item-name">Chicken Organ</h5>
+                        <h3 class="foodplace-menu-item-price">$3.00</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row foodplace-info-menu">
+            <div class="col-12">
+                <h5 class="foodplace-info-section-title">
+                    <i class="fas fa-tags"></i>
+                    Tags
+                </h5>
+            </div>
+            <div class="col-12">
+                <div class="container">
+                    <a href="" class="badge badge-primary foodplace-badge-item">
+                        <h5>50 Nanyang Avenue Singapore 639798</h5>
+                    </a>
+                    <a href="" class="badge badge-primary foodplace-badge-item">
+                        <h5>Hall 1</h5>
+                    </a>
+                    <a href="" class="badge badge-primary foodplace-badge-item">
+                        <h5>Daily: 7am to 9pm</h5>
+                    </a>
+                    <a href="" class="badge badge-primary foodplace-badge-item">
+                        <h5>Fish Soup</h5>
+                    </a>
+                    <a href="" class="badge badge-primary foodplace-badge-item">
+                        <h5>Sliced Fish Ban Mian</h5>
+                    </a>
+                    <a href="" class="badge badge-primary foodplace-badge-item">
+                        <h5>Fried Fish Bee Hoon</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row foodplace-info-menu">
+            <div class="col-sm-12 col-lg-4">
+                <h5 class="foodplace-info-section-title">
+                    <i class="fas fa-star"></i>
+                    Ratings overview
+                </h5>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="foodplace-rating-scale-title"><i class="far fa-smile scale-style"></i>Excellent</h5>
+                        </div>
+                        <div class="col-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-scale-bar" role="progressbar" style="width: 25%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="foodplace-rating-scale-num text-right">1 out of 5</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="foodplace-rating-scale-title"><i class="far fa-meh scale-style"></i>Above Average</h5>
+                        </div>
+                        <div class="col-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-scale-bar" role="progressbar" style="width: 25%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="foodplace-rating-scale-num text-right">1 out of 5</h5>
+                        </div>                    
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="foodplace-rating-scale-title"><i class="far fa-meh-blank scale-style"></i>Average</h5>
+                        </div>
+                        <div class="col-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-scale-bar progress-scale-bar" role="progressbar" style="width: 25%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="foodplace-rating-scale-num text-right">1 out of 5</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="foodplace-rating-scale-title"><i class="far fa-meh-rolling-eyes scale-style"></i>Below Average</h5>
+                        </div>
+                        <div class="col-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-scale-bar" role="progressbar" style="width: 25%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="foodplace-rating-scale-num text-right">1 out of 5</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="foodplace-rating-scale-title"><i class="far fa-frown scale-style"></i>Poor</h5>
+                        </div>
+                        <div class="col-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-scale-bar" role="progressbar" style="width: 25%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <h5 class="foodplace-rating-scale-num text-right">1 out of 5</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-8">
+                <h5 class="foodplace-info-section-title">
+                    <i class="fas fa-comments"></i>
+                    Comments
+                </h5>
+                <div class="container foodplace-feedback-form-container">
+                    <h5 class="foodplace-feedback-form-title">Contribute your experience at this outlet</h5>
+                    <form>
+                        <h5 class="foodplace-feedback-form-criteria">Rate your experience:</h5>
+                            <div class="row lead" style="padding-left: 15px;">
+                                <div id="stars" class="starrr"></div>
+                            </div>
+                        <h5 class="foodplace-feedback-form-criteria">Provide your honest feedback:</h5>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group align-items-end">
+                            <input type="submit" class="btn btn-primary form-control foodplace-feedback-btn" value="Comment" />
+                        </div>
+                    </form>
+                </div>
+                <div class="container foodplace-comment-list">
+                    <div class="media foodplace-comment">
+                        <div class="media-body">
+                            <h5 class="mt-0">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </h5>
+                            <h5 class="mt-0 comment-timestamp">2019-02-14</h5>
+                            <p class="comment-body">
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </p>
+                        </div>
+                    </div> 
+                    <div class="media foodplace-comment">
+                        <div class="media-body">
+                            <h5 class="mt-0">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </h5>
+                            <h5 class="mt-0 comment-timestamp">2019-02-14</h5>
+                            <p class="comment-body">
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </p>
+                        </div>
+                    </div> 
+                    <div class="media foodplace-comment">
+                        <div class="media-body">
+                            <h5 class="mt-0">
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </h5>
+                            <h5 class="mt-0 comment-timestamp">2019-02-14</h5>
+                            <p class="comment-body">
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </p>
+                        </div>
+                    </div> 
+                    <div class="media foodplace-comment">
+                        <div class="media-body">
+                            <h5 class="mt-0">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </h5>
+                            <h5 class="mt-0 comment-timestamp">2019-02-14</h5>
+                            <p class="comment-body">
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </p>
+                        </div>
+                    </div> 
+                    <div class="media foodplace-comment">
+                        <div class="media-body">
+                            <h5 class="mt-0">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </h5>
+                            <h5 class="mt-0 comment-timestamp">2019-02-14</h5>
+                            <p class="comment-body">
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </p>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'webapp/dist/js/starrr.js' %}"></script>
+{% endblock scripts %}}

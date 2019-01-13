@@ -1,0 +1,187 @@
+body{
+    background-color: #EEEEEE;
+}
+
+.container-loc{
+    margin: 20px 0px 20px 0px;
+}
+
+.container-loc-content{
+    background-color: #FFFFFF;
+    margin-top: 25px;
+    padding: 40px 20px 20px 20px;
+}
+
+.container-loc-box{
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px 15px 10px 15px;
+}
+
+.carousel-inner-foodplace{
+    min-height: 350px;
+    max-height: 350px;
+    background-color: #EEEEEE;
+}
+
+.foodplace-info-name{
+    width: 100%;
+    padding: 10px 0px 15px 10px;
+    font-weight: 500;
+    font-size: 2em;
+    color: #424242;
+}
+
+.foodplace-info-section-title{
+    font-weight: 400;
+    color: #424242;
+    font-size: 1.3em;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.foodplace-info-section-title > i{
+    padding-right: 10px;
+}
+
+.foodplace-info-container{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.foodplace-info-label{
+    padding: 12px 0px 12px 0px;
+}
+
+.foodplace-info-label > div > h5{
+    font-weight: 300;
+    font-size: 1.15em;
+}
+
+.foodplace-info-menu{
+    padding: 15px 10px 15px 10px;
+}
+
+.foodplace-menu-item-list{
+    padding: 10px 5px 10px 5px;
+    background-color: #f5f5f5;
+}
+
+.foodplace-menu-item{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.foodplace-menu-item-name{
+    font-weight: 400;
+    font-size: 1.2em;
+    color: #f4511e;
+}
+
+.foodplace-menu-item-price{
+    font-weight: 300;
+    font-size: 1em;
+}
+
+.foodplace-badge-item{
+    background-color: white;
+    color: #3f51b5;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 15px 15px 5px 15px;
+}
+
+.foodplace-badge-item > h5{
+    font-weight: 300;
+    font-size: 1.2em;
+}
+
+.foodplace-badge-item:hover, .foodplace-badge-item:focus{
+    background-color: #3f51b5 !important;
+}
+
+.foodplace-rating-scale-title{
+    font-weight: 400;
+    font-size: 1.2em;
+    padding-bottom: 5px;
+}
+
+.foodplace-rating-scale-num{
+    font-weight: 300;
+    font-size: 1em;
+    padding-top: 5px;
+    padding-right: 10px;
+}
+
+.scale-style{
+    padding-right: 10px;
+    color: #3f51b5;
+}
+
+.progress-scale-bar{
+    background-color: #3f51b5;
+}
+
+.foodplace-feedback-form-container{
+    background-color: #f5f5f5;
+    padding: 15px;
+    padding-bottom: 5px;
+}
+
+.foodplace-feedback-form-title{
+    color: #f4511e;
+    font-weight: 400;
+    font-size: 1.2em;
+}
+
+.foodplace-feedback-form-criteria{
+    color: #424242;
+    font-weight: 300;
+    font-size: 1em;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+.foodplace-feedback-btn{
+    background-color: #f5f5f5;
+    border-color: #3f51b5;
+    color: #3f51b5;
+}
+
+.foodplace-feedback-btn:hover{
+    color: white;
+    border-color: #3f51b5;
+    background-color: #3f51b5;
+}
+
+.foodplace-comment-list{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.foodplace-comment{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-bottom-width: 1px;
+    border-bottom-color: #EEEEEE;
+    border-bottom-style: solid;
+}
+
+.foodplace-comment:last-child{
+    border: none;
+}
+
+.comment-timestamp{
+    font-size: 0.8em;
+    font-weight: 300;
+    color: #616161;
+}
+
+.comment-body{
+    font-size: 1em;
+    font-weight: 300;
+}
