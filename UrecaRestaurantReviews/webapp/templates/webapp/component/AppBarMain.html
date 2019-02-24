@@ -5,16 +5,16 @@
 <div class="container-fluid container-navbar shadow-sm">
     <div class="container">
         <nav class="navbar navbar-expand-sm ">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/webapp">
                 <img src="{% static 'webapp/assets/logo-brandname.png' %}" width="175" height="55" class="d-inline-block align-top" />
             </a>
             <button class="navbar-toggler navbar-toggler-btn" type="button" data-toggle="collapse" data-target="#navBarMain" aria-controls="" aria-expanded="false" aria-label="Toggle">
                 <span class="fas fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse navbar-separator" id="navBarMain">
-                <form class="form-inline my-2 my-lg-0 ml-auto">
+                <form class="form-inline my-2 my-lg-0 ml-auto" action="/webapp/search" method="GET" >
                     <div class="input-group">
-                        <input class="form-control input-text-search" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control input-text-search" name="q" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary btn-search" type="submit">
                                 <i class="fas fa-search"></i>

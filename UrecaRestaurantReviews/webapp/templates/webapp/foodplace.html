@@ -14,14 +14,13 @@
                 <div id="foodplaceSlider" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner carousel-inner-foodplace">
                         <div class="carousel-item carousel-foodplace-img-wrapper active">
-                            <img src="{% static 'webapp/assets/carousel-1.jpg' %}" class="d-block w-100" alt="" />
+                            <img src={{ restaurant.imgActive }} class="d-block w-100" alt="" />
                         </div>
-                        <div class="carousel-item carousel-foodplace-img-wrapper">
-                            <img src="{% static 'webapp/assets/carousel-2.jpg' %}" class="d-block w-100" alt="" />
-                        </div>
-                        <div class="carousel-item carousel-foodplace-img-wrapper">
-                            <img src="{% static 'webapp/assets/carousel-3.jpg' %}" class="d-block w-100" alt="" />
-                        </div>
+                        {% for url in restaurant.assets %}
+                            <div class="carousel-item carousel-foodplace-img-wrapper">
+                                <img src={{ url.url }} class="d-block w-100" alt="" />
+                            </div>
+                        {% endfor %}
                     </div>
                     <div class="carousel-control-prev" href="#foodplaceSlider" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -34,14 +33,14 @@
                 </div>
             </div>
             <div class="col-md foodplace-info-brief-container">
-                <h1 class="foodplace-info-name">Co-op @ NTU Cafe</h1>
+                <h1 class="foodplace-info-name">{{ restaurant.name }}</h1>
                 <div class="container foodplace-info-container">
                     <div class="row foodplace-info-label">
                         <div class="col-2">
                             <i class="fas fa-map-marker-alt" style="font-size: 1.25em; color: #c62828;"></i>
                         </div>
                         <div class="col-10">
-                            <h5>50 Nanyang Avenue Singapore 639798</h5>
+                            <h5>{{ restaurant.addr }}</h5>
                         </div>
                     </div>
                     <div class="row foodplace-info-label">
@@ -49,7 +48,7 @@
                             <i class="fas fa-thumbtack" style="font-size: 1.25em; color: #1976d2;"></i>
                         </div>
                         <div class="col-10">
-                            <h5>Hall 1</h5>
+                            <h5>{{ restaurant.sub_loc }}</h5>
                         </div>
                     </div>
                     <div class="row foodplace-info-label">
@@ -57,7 +56,7 @@
                             <i class="fas fa-phone" style="font-size: 1.25em; color: #388e3c;"></i>
                         </div>
                         <div class="col-10">
-                            <h5>+65 6334 3033</h5>
+                            <h5>{{ restaurant.phone_no }}</h5>
                         </div>
                     </div>
                     <div class="row foodplace-info-label">
@@ -65,7 +64,7 @@
                             <i class="fas fa-clock" style="font-size: 1.25em; color: #616161;"></i>
                         </div>
                         <div class="col-10">
-                            <h5>Daily: 7am to 9pm</h5>
+                            <h5>​​{{ restaurant.operating_hour }}</h5>
                         </div>
                     </div>
                     <div class="row foodplace-info-label">
@@ -73,7 +72,7 @@
                             <i class="fas fa-chair" style="font-size: 1.25em; color: #616161;"></i>
                         </div>
                         <div class="col-10">
-                            <h5>293 Seats</h5>
+                            <h5>{{ restaurant.capacity }} Seats</h5>
                         </div>
                     </div>
                 </div>
@@ -88,38 +87,12 @@
             </div>
             <div class="col-12">
                 <div class="row foodplace-menu-item-list">
-                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
-                        <h5 class="foodplace-menu-item-name">Min 5 Pcs With Noodle / Rice</h5>
-                        <h3 class="foodplace-menu-item-price">$3.00</h3>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
-                        <h5 class="foodplace-menu-item-name">Sichuan Veg Ban Mian</h5>
-                        <h3 class="foodplace-menu-item-price">$3.00</h3>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
-                        <h5 class="foodplace-menu-item-name">Sliced Fish Ban Mian</h5>
-                        <h3 class="foodplace-menu-item-price">$3.00</h3>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
-                        <h5 class="foodplace-menu-item-name">Fish Soup</h5>
-                        <h3 class="foodplace-menu-item-price">$3.00</h3>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
-                        <h5 class="foodplace-menu-item-name">Sliced Fish Bee Hoon</h5>
-                        <h3 class="foodplace-menu-item-price">$3.00</h3>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
-                        <h5 class="foodplace-menu-item-name">Fried Fish Bee Hoon</h5>
-                        <h3 class="foodplace-menu-item-price">$3.00</h3>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
-                        <h5 class="foodplace-menu-item-name">Steamed Dumpling (6pcs)</h5>
-                        <h3 class="foodplace-menu-item-price">$3.00</h3>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
-                        <h5 class="foodplace-menu-item-name">Chicken Organ</h5>
-                        <h3 class="foodplace-menu-item-price">$3.00</h3>
-                    </div>
+                    {% for item in restaurant.menu %}
+                        <div class="col-lg-4 col-md-6 col-sm-12 foodplace-menu-item">
+                            <h5 class="foodplace-menu-item-name">{{ item.name }}</h5>
+                            <h3 class="foodplace-menu-item-price">${{ item.price }}</h3>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -132,24 +105,11 @@
             </div>
             <div class="col-12">
                 <div class="container">
-                    <a href="" class="badge badge-primary foodplace-badge-item">
-                        <h5>50 Nanyang Avenue Singapore 639798</h5>
-                    </a>
-                    <a href="" class="badge badge-primary foodplace-badge-item">
-                        <h5>Hall 1</h5>
-                    </a>
-                    <a href="" class="badge badge-primary foodplace-badge-item">
-                        <h5>Daily: 7am to 9pm</h5>
-                    </a>
-                    <a href="" class="badge badge-primary foodplace-badge-item">
-                        <h5>Fish Soup</h5>
-                    </a>
-                    <a href="" class="badge badge-primary foodplace-badge-item">
-                        <h5>Sliced Fish Ban Mian</h5>
-                    </a>
-                    <a href="" class="badge badge-primary foodplace-badge-item">
-                        <h5>Fried Fish Bee Hoon</h5>
-                    </a>
+                    {% for item in restaurant.tag %}
+                        <a href="/webapp/search?q={{ item.name }}" class="badge badge-primary foodplace-badge-item">
+                            <h5>{{ item.name }}</h5>
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -166,11 +126,11 @@
                         </div>
                         <div class="col-12">
                             <div class="progress">
-                                <div class="progress-bar progress-scale-bar" role="progressbar" style="width: 25%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+                                <div class="progress-bar progress-scale-bar" role="progressbar" style="width: {{ restaurant.excellentReviewPercent }};" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
                             </div>
                         </div>
                         <div class="col-12">
-                            <h5 class="foodplace-rating-scale-num text-right">1 out of 5</h5>
+                            <h5 class="foodplace-rating-scale-num text-right">{{ restaurant.excellentReview }} out of {{ restaurant.totalReviewer }}</h5>
                         </div>
                     </div>
                     <div class="row">
@@ -179,11 +139,11 @@
                         </div>
                         <div class="col-12">
                             <div class="progress">
-                                <div class="progress-bar progress-scale-bar" role="progressbar" style="width: 25%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+                                <div class="progress-bar progress-scale-bar" role="progressbar" style="width: {{ restaurant.aboveReviewPercent }};" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
                             </div>
                         </div>
                         <div class="col-12">
-                            <h5 class="foodplace-rating-scale-num text-right">1 out of 5</h5>
+                            <h5 class="foodplace-rating-scale-num text-right">{{ restaurant.aboveReview }} out of {{ restaurant.totalReviewer }}</h5>
                         </div>                    
                     </div>
                     <div class="row">
@@ -192,11 +152,11 @@
                         </div>
                         <div class="col-12">
                             <div class="progress">
-                                <div class="progress-bar progress-scale-bar progress-scale-bar" role="progressbar" style="width: 25%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+                                <div class="progress-bar progress-scale-bar progress-scale-bar" role="progressbar" style="width: {{ restaurant.avgReviewPercent }};" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
                             </div>
                         </div>
                         <div class="col-12">
-                            <h5 class="foodplace-rating-scale-num text-right">1 out of 5</h5>
+                            <h5 class="foodplace-rating-scale-num text-right">{{ restaurant.avgReview }} out of {{ restaurant.totalReviewer }}</h5>
                         </div>
                     </div>
                     <div class="row">
@@ -205,11 +165,11 @@
                         </div>
                         <div class="col-12">
                             <div class="progress">
-                                <div class="progress-bar progress-scale-bar" role="progressbar" style="width: 25%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+                                <div class="progress-bar progress-scale-bar" role="progressbar" style="width: {{ restaurant.belowReviewPercent }};" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
                             </div>
                         </div>
                         <div class="col-12">
-                            <h5 class="foodplace-rating-scale-num text-right">1 out of 5</h5>
+                            <h5 class="foodplace-rating-scale-num text-right">{{ restaurant.belowReview }} out of {{ restaurant.totalReviewer }}</h5>
                         </div>
                     </div>
                     <div class="row">
@@ -218,11 +178,11 @@
                         </div>
                         <div class="col-12">
                             <div class="progress">
-                                <div class="progress-bar progress-scale-bar" role="progressbar" style="width: 25%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+                                <div class="progress-bar progress-scale-bar" role="progressbar" style="width: {{ restaurant.poorReviewPercent }};" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
                             </div>
                         </div>
                         <div class="col-12">
-                            <h5 class="foodplace-rating-scale-num text-right">1 out of 5</h5>
+                            <h5 class="foodplace-rating-scale-num text-right">{{ restaurant.poorReview }} out of {{ restaurant.totalReviewer }}</h5>
                         </div>
                     </div>
                 </div>
@@ -235,112 +195,73 @@
                 <div class="container foodplace-feedback-form-container">
                     <h5 class="foodplace-feedback-form-title">Contribute your experience at this outlet</h5>
                     <form>
+                        {% csrf_token %}
+                        <h5 class="foodplace-feedback-form-criteria">Name:</h5>
+                        <div class="form-group">
+                            <input type="text" id="txtName" value="" class="form-control foodplace-comment-text-box" placeholder="Name" />
+                        </div>
                         <h5 class="foodplace-feedback-form-criteria">Rate your experience:</h5>
                             <div class="row lead" style="padding-left: 15px;">
                                 <div id="stars" class="starrr"></div>
                             </div>
                         <h5 class="foodplace-feedback-form-criteria">Provide your honest feedback:</h5>
                         <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <textarea id="txtFeedback" class="form-control foodplace-comment-text-box" rows="3"></textarea>
                         </div>
                         <div class="form-group align-items-end">
-                            <input type="submit" class="btn btn-primary form-control foodplace-feedback-btn" value="Comment" />
+                            <input type="submit" id="commentBtn" class="btn btn-primary form-control foodplace-feedback-btn" value="Comment" />
                         </div>
                     </form>
+                    <div id="{{ restaurant.id }}" class="foodplace-place-info-form"></div>
                 </div>
                 <div class="container foodplace-comment-list">
-                    <div class="media foodplace-comment">
-                        <div class="media-body">
-                            <h5 class="mt-0">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </h5>
-                            <h5 class="mt-0 comment-timestamp">2019-02-14</h5>
-                            <p class="comment-body">
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </p>
+                    {% for review in restaurant.review %}
+                        <div class="media foodplace-comment">
+                            <div class="media-body">
+                                <h5 class="mt-0">
+                                    {% for i in review.star_score %}
+                                        <i class="fa fa-star"></i>
+                                    {% endfor %}
+                                    {% for i in review.remainder_score %}
+                                        <i class="far fa-star"></i>
+                                    {% endfor %}
+                                </h5>
+                                <h5 class="mt-0 comment-timestamp">by <b>{{ review.reviewer }}</b></h5>
+                                <p class="comment-body">
+                                    {{ review.comment }}
+                                </p>
+                            </div>
                         </div>
-                    </div> 
-                    <div class="media foodplace-comment">
-                        <div class="media-body">
-                            <h5 class="mt-0">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </h5>
-                            <h5 class="mt-0 comment-timestamp">2019-02-14</h5>
-                            <p class="comment-body">
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </p>
-                        </div>
-                    </div> 
-                    <div class="media foodplace-comment">
-                        <div class="media-body">
-                            <h5 class="mt-0">
-                                <i class="fa fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </h5>
-                            <h5 class="mt-0 comment-timestamp">2019-02-14</h5>
-                            <p class="comment-body">
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </p>
-                        </div>
-                    </div> 
-                    <div class="media foodplace-comment">
-                        <div class="media-body">
-                            <h5 class="mt-0">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </h5>
-                            <h5 class="mt-0 comment-timestamp">2019-02-14</h5>
-                            <p class="comment-body">
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </p>
-                        </div>
-                    </div> 
-                    <div class="media foodplace-comment">
-                        <div class="media-body">
-                            <h5 class="mt-0">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </h5>
-                            <h5 class="mt-0 comment-timestamp">2019-02-14</h5>
-                            <p class="comment-body">
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </p>
-                        </div>
-                    </div> 
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 </div>
+<button type="button" id="commentToggler" class="btn btn-primary" style="visibility: hidden;" data-toggle="modal" data-target="#commentModal"></button>
+
+<div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content foodplace-modal-content">
+      <div class="modal-header foodplace-modal-header">
+        <h5 class="modal-title foodplace-modal-title" id="commentModelTitle">Your Feedback has been Submitted</h5>
+        <button type="button" class="close foodplace-modal-close foodplace-modal-feedback-close" data-dismiss="modal" aria-label="Dismiss">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        On behalf of NTU Food Hunter, thank you for your valuable feedback. <br/><br/>
+        Your experience will allow our viewers to make more informed decision when choosing a place to dine in.
+      </div>
+      <div class="modal-footer foodplace-modal-footer">
+        <button type="button" id="foodplace-continue-view" class="btn btn-secondary foodplace-modal-button" data-dismiss="modal">Continue Viewing</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}}
 
 {% block scripts %}
 <script type="text/javascript" src="{% static 'webapp/dist/js/starrr.js' %}"></script>
+<script type="text/javascript" src="{% static 'webapp/js/foodplace.js' %}"></script>
 {% endblock scripts %}}

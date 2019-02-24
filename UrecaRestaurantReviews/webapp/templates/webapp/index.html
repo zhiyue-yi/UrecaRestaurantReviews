@@ -13,58 +13,29 @@
             <h2 class="grid-dining-header-sub">Browse through a comprehensive list of available restaurants</h2>
         </div>
         <div class="container grid-dining-card-group">
-            <a href="">
-                <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
-                    <img src="{% static 'webapp/assets/background-image.jpg' %}" class="card-img-top" alt="..." />
-                    <div class="card-body">
-                        <h5 class="card-title card-main-title">Co-op @ NTU Cafe</h5>
-                        <h5 class="card-title card-sub-title">Hall 1</h5>
-                        <p class="card-text card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </p>
+            {% for restaurant in restaurants %}
+                <a href="/webapp/loc/{{ restaurant.id }}">
+                    <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
+                        <img src={{ restaurant.imgurl }} class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title card-main-title">{{ restaurant.name }}</h5>
+                            <h5 class="card-title card-sub-title">{{ restaurant.sub_loc }}</h5>
+                            <p class="card-text card-rating">
+                                {% for star in restaurant.score %}
+                                    <i class="fas fa-star"></i>
+                                {% endfor %}
+                                {% for star in restaurant.remainder_score %}
+                                    <i class="far fa-star"></i>
+                                {% endfor %}
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a href="">
-                <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
-                    <img src="{% static 'webapp/assets/background-image.jpg' %}" class="card-img-top" alt="..." />
-                    <div class="card-body">
-                        <h5 class="card-title card-main-title">Cafe4You @ SPMS</h5>
-                        <h5 class="card-title card-sub-title">Hall 2</h5>
-                        <p class="card-text card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <a href="">
-                <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
-                    <img src="{% static 'webapp/assets/background-image.jpg' %}" class="card-img-top" alt="..." />
-                    <div class="card-body">
-                        <h5 class="card-title card-main-title">Sukho Thai @WKWSCI</h5>
-                        <h5 class="card-title card-sub-title">Hall 3</h5>
-                        <p class="card-text card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </p>
-                    </div>
-                </div>
-            </a>
+                </a>
+            {% endfor %}
         </div>
         <div class="container grid-dining-more-link-container">
             <div class="row justify-content-center">
-                <a class="grid-dining-more-link" href="">View Restaurants <i class="fas fa-arrow-right"></i></a>
+                <a class="grid-dining-more-link" href="/webapp/search?q=Restaurant">View Restaurants <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
@@ -74,58 +45,29 @@
             <h2 class="grid-dining-header-sub">Alternatively, find a food court outlet to dine in</h2>
         </div>
         <div class="container grid-dining-card-group">
-            <a href="">
-                <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
-                    <img src="{% static 'webapp/assets/background-image.jpg' %}" class="card-img-top" alt="..." />
-                    <div class="card-body">
-                        <h5 class="card-title card-main-title">Co-op @ NTU Cafe</h5>
-                        <h5 class="card-title card-sub-title">Hall 4</h5>
-                        <p class="card-text card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </p>
+            {% for foodcourt in food_courts %}
+                <a href="/webapp/loc/{{ foodcourt.id }}">
+                    <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
+                        <img src={{ foodcourt.imgurl }} class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title card-main-title">{{ foodcourt.name }}</h5>
+                            <h5 class="card-title card-sub-title">{{ foodcourt.sub_loc }}</h5>
+                            <p class="card-text card-rating">
+                                {% for star in foodcourt.score %}
+                                    <i class="fas fa-star"></i>
+                                {% endfor %}
+                                {% for star in foodcourt.remainder_score %}
+                                    <i class="far fa-star"></i>
+                                {% endfor %}
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a href="">
-                <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
-                    <img src="{% static 'webapp/assets/background-image.jpg' %}" class="card-img-top" alt="..." />
-                    <div class="card-body">
-                        <h5 class="card-title card-main-title">Cafe4You @ SPMS</h5>
-                        <h5 class="card-title card-sub-title">Hall 5</h5>
-                        <p class="card-text card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <a href="">
-                <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
-                    <img src="{% static 'webapp/assets/background-image.jpg' %}" class="card-img-top" alt="..." />
-                    <div class="card-body">
-                        <h5 class="card-title card-main-title">Sukho Thai @WKWSCI</h5>
-                        <h5 class="card-title card-sub-title">Hall 5</h5>
-                        <p class="card-text card-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </p>
-                    </div>
-                </div>
-            </a>
+                </a>
+            {% endfor %}
         </div>
         <div class="container grid-dining-more-link-container">
             <div class="row justify-content-center">
-                <a class="grid-dining-more-link" href="">View Food Courts Outlet <i class="fas fa-arrow-right"></i></a>
+                <a class="grid-dining-more-link" href="/webapp/search?q=Food+Court">View Food Courts Outlet <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>

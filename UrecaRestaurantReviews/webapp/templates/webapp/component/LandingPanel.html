@@ -2,7 +2,9 @@
 <!-- panel template for the landing screen -->
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'webapp/css/LandingPanel.css' %}">
-<div class="jumbotron jumbotron-fluid panel landing-panel shadow" style="background-image: url('{% static 'webapp/assets/landing-screen-banner.jpg' %}')"></div>
+<div class="jumbotron jumbotron-fluid panel landing-panel shadow" style="background-color: rgb(61, 123, 201)"></div>
+<!--
+<div class="jumbotron jumbotron-fluid panel landing-panel shadow" style="background-image: url('{% static 'webapp/assets/landing-screen-banner.jpg' %}')"></div> -->
 <div class="jumbotron jumbotron-fluid panel landing-panel-overlay shadow"></div>
 <div class="jumbotron jumbotron-fluid panel content-panel shadow">
     <div class="container content-panel-wrapper">
@@ -11,12 +13,14 @@
             <h1 class="header content-header">Waiting in NTU and feeling hungry?</h1>
             <h2 class="header content-subheader">Browse your cravings today!</h2>
             <div class="row justify-content-center content-search-container">
-                <div class="input-group input-group-lg content-search">
-                    <input type="text" class="form-control input-text-search" placeholder="Looking for restaurants? Or somewhere to dine?" />
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary btn-search" type="button">Show Me</button>
+                <form method="GET" action="/webapp/search">
+                    <div class="input-group input-group-lg content-search">
+                        <input type="text" name="q" class="form-control input-text-search" placeholder="Looking for restaurants? Or somewhere to dine?" autocomplete="off" />
+                        <div class="input-group-append">
+                            <input type="submit" class="btn btn-outline-secondary btn-search" value="Show Me" />
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

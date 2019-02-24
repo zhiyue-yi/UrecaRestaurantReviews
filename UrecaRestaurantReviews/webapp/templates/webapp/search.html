@@ -10,24 +10,33 @@
 {% include "webapp/component/AppBarMain.html" %}
 <div class="container-fluid container-search">
     <div class="container container-search-content">
-        <h2 class="search-result-title">Displaying search result for <b>"food in NTU"</b></h2>
+        <h2 class="search-result-title">Displaying search result for <b>"{{ q }}"</b></h2>
         <div class="container container-search-refine-box">
-            <form>
+            <form method="GET" action="/webapp/search">
                 <div class="form-row form-row-segment">
                     <div class="col">
-                        <input type="text" class="form-control container-search-text-box" placeholder="Search" />
+                        <input type="text" name="q" class="form-control container-search-text-box" placeholder="Search" value="{{ q }}" autocomplete="off" />
                     </div>
                 </div>
                 <div class="form-row form-row-segment">
                     <div class="col">
+                        <!--
                         <div class="form-check form-check-inline form-check-filter-list">
-                            <input type="checkbox" class="form-check-input" />
+                            {% if Restaurant %}
+                                <input type="checkbox" name="type" value="Restaurant" class="form-check-input" checked />
+                            {% else %}
+                                <input type="checkbox" name="type" value="Restaurant" class="form-check-input" />
+                            {% endif %}
                             <label class="form-check-label form-check-label-filter">Restaurant</label>
                         </div>
                         <div class="form-check form-check-inline form-check-filter-list">
-                            <input type="checkbox" class="form-check-input" />
+                            {% if "Food Court" %}
+                                <input type="checkbox" name="type" value="Food Court" class="form-check-input" checked />
+                            {% else %}
+                                <input type="checkbox" name="type" value="Food Court" class="form-check-input" />
+                            {% endif %}
                             <label class="form-check-label form-check-label-filter">Food Court</label>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col form-row-submit-btn">
                         <input type="submit" class="btn btn-primary" value="Search" />
@@ -37,56 +46,28 @@
         </div>
         <div class="container container-search-result-box">
             <div class="container grid-dining-card-group">
-                <a href="">
+                {% for restaurant in results %}
+                <a href="/webapp/loc/{{ restaurant.id }}">
                     <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
-                        <img src="{% static 'webapp/assets/background-image.jpg' %}" class="card-img-top" alt="..." />
-                        <div class="card-body grid-dining-card-body">
-                            <h5 class="card-title card-main-title">Co-op @ NTU Cafe</h5>
-                            <h5 class="card-title card-sub-title">Hall 1</h5>
-                            <p class="card-text card-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </p>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
-                        <img src="{% static 'webapp/assets/background-image.jpg' %}" class="card-img-top" alt="..." />
+                        <img src={{ restaurant.imgurl }} class="card-img-top" alt="..." />
                         <div class="card-body">
-                            <h5 class="card-title card-main-title">Cafe4You @ SPMSCafe</h5>
-                            <h5 class="card-title card-sub-title">Hall 2</h5>
+                            <h5 class="card-title card-main-title">{{ restaurant.name }}</h5>
+                            <h5 class="card-title card-sub-title">{{ restaurant.sub_loc }}</h5>
                             <p class="card-text card-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
+                                {% for star in restaurant.score %}
+                                    <i class="fas fa-star"></i>
+                                {% endfor %}
+                                {% for star in restaurant.remainder_score %}
+                                    <i class="far fa-star"></i>
+                                {% endfor %}
                             </p>
                         </div>
                     </div>
                 </a>
-                <a href="">
-                    <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
-                        <img src="{% static 'webapp/assets/background-image.jpg' %}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title card-main-title">Sukho Thai</h5>
-                            <h5 class="card-title card-sub-title">Hall 3</h5>
-                            <p class="card-text card-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </p>
-                        </div>
-                    </div>
-                </a>
+                {% endfor %}
             </div>
         </div>
+        <!-- omit for now
         <div class="container">
             <nav>
                 <ul class="pagination justify-content-center">
@@ -100,6 +81,7 @@
                 </ul>
             </nav>
         </div>
+        -->
     </div>
 </div>
 {% endblock content %}

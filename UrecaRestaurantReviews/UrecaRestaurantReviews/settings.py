@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'webapp',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +78,14 @@ WSGI_APPLICATION = 'UrecaRestaurantReviews.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ntu_food_hunter',
+        'USER': 'root',
+        'PASSWORD': '0010',
+        'HOST': '',
+        'PORT': '3306'
+    },
+    'sqlite3': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
