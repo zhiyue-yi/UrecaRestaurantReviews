@@ -1,13 +1,50 @@
 import webapp.models as model
 
+# DiningCluster
+cluster_1 = model.DiningCluster(name="North Spine1", postal_code=123456, latitude=1.34621, longitude=103.68866)
+cluster_2 = model.DiningCluster(name="North Spine1", postal_code=123456, latitude=1.34435, longitude=103.67847)
+cluster_3 = model.DiningCluster(name="North Spine1", postal_code=123456, latitude=1.35049, longitude=103.68795)
+cluster_4 = model.DiningCluster(name="North Spine1", postal_code=123456, latitude=1.34520, longitude=103.67820)
+cluster_5 = model.DiningCluster(name="North Spine1", postal_code=123456, latitude=1.35225, longitude=103.68147)
+cluster_6 = model.DiningCluster(name="North Spine1", postal_code=123456, latitude=1.35051, longitude=103.68138)
+cluster_7 = model.DiningCluster(name="North Spine1", postal_code=123456, latitude=1.34842, longitude=103.68543)
+cluster_8 = model.DiningCluster(name="North Spine1", postal_code=123456, latitude=1.35476, longitude=103.68468)
+cluster_9 = model.DiningCluster(name="North Spine1", postal_code=123456, latitude=1.34523, longitude=103.68538)
+cluster_10 = model.DiningCluster(name="North Spine2", postal_code=123456, latitude=1.35430, longitude=103.68645)
+cluster_11 = model.DiningCluster(name="North Spine2", postal_code=123456, latitude=1.35397, longitude=103.68801)
+cluster_12 = model.DiningCluster(name="North Spine2", postal_code=123456, latitude=1.34183, longitude=103.68192)
+cluster_13 = model.DiningCluster(name="North Spine2", postal_code=123456, latitude=1.34251, longitude=103.68025)
+cluster_14 = model.DiningCluster(name="North Spine2", postal_code=123456, latitude=1.34713, longitude=103.68003)
+cluster_15 = model.DiningCluster(name="North Spine2", postal_code=123456, latitude=1.34320, longitude=103.68266)
+cluster_16 = model.DiningCluster(name="North Spine2", postal_code=123456, latitude=1.35247, longitude=103.68164)
+cluster_17 = model.DiningCluster(name="North Spine2", postal_code=123456, latitude=1.34345, longitude=103.68238)
+cluster_18 = model.DiningCluster(name="North Spine2", postal_code=123456, latitude=1.34367, longitude=103.68314)
+cluster_1.save()
+cluster_2.save()
+cluster_3.save()
+cluster_4.save()
+cluster_5.save()
+cluster_6.save()
+cluster_7.save()
+cluster_8.save()
+cluster_9.save()
+cluster_10.save()
+cluster_11.save()
+cluster_12.save()
+cluster_13.save()
+cluster_14.save()
+cluster_15.save()
+cluster_16.save()
+cluster_17.save()
+cluster_18.save()
+
 # DiningSubArea
-subarea_1 = model.DiningSubArea(loc='North Spine Food Court')
-subarea_2 = model.DiningSubArea(loc='North Spine Plaza')
-subarea_2.save()
+subarea_1 = model.DiningSubArea(loc='North Spine Food Court', cluster=cluster_1)
+subarea_2 = model.DiningSubArea(loc='North Spine Plaza', cluster=cluster_10)
 subarea_1.save()
+subarea_2.save()
 
-
-# DiningARea
+# DiningArea
 diningarea_1 = model.DiningArea(name='Hand-made Noodles', addr="North Spine Plaza 76 Nanyang " + \
                                 "Drive NS2.1-02-03/01A Singapore 637331", phone_no='6465 8588', \
                                 operating_hour='Mon to Fri: 7am to 9pm Sat: 7am to 3pm Sun & PH: Closed', \

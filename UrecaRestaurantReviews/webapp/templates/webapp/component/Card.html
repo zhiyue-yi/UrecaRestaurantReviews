@@ -1,0 +1,32 @@
+<!--
+    @name               :   Card.html
+    @description        :   Template for Displaying a Collection of Cards
+    @author             :   Lin Yixiang, Leon
+-->
+
+<!-- stylesheets -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'webapp/css/Card.css' %}">
+
+<!-- template implementation -->
+<div class="container grid-dining-card-group">
+    {% for item in grid_list %}
+        <a href="/webapp/loc/{{ item.id }}">
+            <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
+                <img src={{ item.imgurl }} class="card-img-top" alt="..." />
+                <div class="card-body">
+                    <h5 class="card-title card-main-title">{{ item.name }}</h5>
+                    <h5 class="card-title card-sub-title">{{ item.sub_loc }}</h5>
+                    <p class="card-text card-rating">
+                        {% for star in item.score %}
+                            <i class="fas fa-star"></i>
+                        {% endfor %}
+                        {% for star in item.remainder_score %}
+                            <i class="far fa-star"></i>
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>

@@ -1,6 +1,6 @@
 .navbar-brand-title{
     color: #fafafa;
-    font-size: 1.25em;
+    font-size: 1.50em;
     font-family: 'Work Sans', sans-serif;
     font-weight: 700;
 }
@@ -12,6 +12,7 @@
 .navbar-items > li > a{
     color: #fafafa;
     font-weight: 500;
+    font-size: 1.25em;
 }
 
 .navbar-items > li > a:hover{

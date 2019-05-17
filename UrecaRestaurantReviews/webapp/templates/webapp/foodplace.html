@@ -10,6 +10,7 @@
 <div class="container-fluid container-loc">
     <div class="container container-loc-content shadow">
         <div class="row">
+            <!-- render carousel slider -->
             <div class="col-md">
                 <div id="foodplaceSlider" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner carousel-inner-foodplace">
@@ -32,6 +33,8 @@
                     </div> 
                 </div>
             </div>
+
+            <!-- render information of a listing -->
             <div class="col-md foodplace-info-brief-container">
                 <h1 class="foodplace-info-name">{{ restaurant.name }}</h1>
                 <div class="container foodplace-info-container">
@@ -78,6 +81,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- render the menu of a listing -->
         <div class="row foodplace-info-menu">
             <div class="col-12">
                 <h5 class="foodplace-info-section-title">
@@ -96,6 +101,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- render relevant tags of a listing -->
         <div class="row foodplace-info-menu">
             <div class="col-12">
                 <h5 class="foodplace-info-section-title">
@@ -113,6 +120,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- render rating overview of a listing -->
         <div class="row foodplace-info-menu">
             <div class="col-sm-12 col-lg-4">
                 <h5 class="foodplace-info-section-title">
@@ -187,11 +196,14 @@
                     </div>
                 </div>
             </div>
+
+            <!-- render comments section -->
             <div class="col-sm-12 col-lg-8">
                 <h5 class="foodplace-info-section-title">
                     <i class="fas fa-comments"></i>
                     Comments
                 </h5>
+                <!-- render elements to allow contribution of comments -->
                 <div class="container foodplace-feedback-form-container">
                     <h5 class="foodplace-feedback-form-title">Contribute your experience at this outlet</h5>
                     <form>
@@ -199,6 +211,36 @@
                         <h5 class="foodplace-feedback-form-criteria">Name:</h5>
                         <div class="form-group">
                             <input type="text" id="txtName" value="" class="form-control foodplace-comment-text-box" placeholder="Name" />
+                        </div>
+                        <h5 class="foodplace-feedback-form-criteria">Likes:</h5>
+                        <div class="form-group foodplace-feedback-like-food">
+                            <select class="form-control foodplace-comment-dropdown-box">
+                                <option value="0">Select Food Item</option>
+                                {% for item in restaurant.menu %}
+                                    <option value="{{ item.id }}">{{ item.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary form-control foodplace-feedback-btn" id="likeItem">
+                                <span class="fas fa-plus"></span>
+                                Add another item
+                            </button>
+                        </div>
+                        <h5 class="foodplace-feedback-form-criteria">Dislikes:</h5>
+                        <div class="form-group foodplace-feedback-dislike-food">
+                            <select class="form-control foodplace-comment-dropdown-box">
+                                <option value="0">Select Food Item</option>
+                                {% for item in restaurant.menu %}
+                                    <option value="{{ item.id }}">{{ item.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary form-control foodplace-feedback-btn" id="dislikeItem">
+                                <span class="fas fa-plus"></span>
+                                Add another item
+                            </button>
                         </div>
                         <h5 class="foodplace-feedback-form-criteria">Rate your experience:</h5>
                             <div class="row lead" style="padding-left: 15px;">
@@ -214,6 +256,8 @@
                     </form>
                     <div id="{{ restaurant.id }}" class="foodplace-place-info-form"></div>
                 </div>
+
+                <!-- render comments by other people -->
                 <div class="container foodplace-comment-list">
                     {% for review in restaurant.review %}
                         <div class="media foodplace-comment">
@@ -263,5 +307,6 @@
 
 {% block scripts %}
 <script type="text/javascript" src="{% static 'webapp/dist/js/starrr.js' %}"></script>
+{{ restaurant.menu|json_script:"restaurant_menu" }}
 <script type="text/javascript" src="{% static 'webapp/js/foodplace.js' %}"></script>
 {% endblock scripts %}}

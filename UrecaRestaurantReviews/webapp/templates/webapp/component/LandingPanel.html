@@ -1,10 +1,16 @@
-<!-- LandingPanel.html -->
-<!-- panel template for the landing screen -->
+<!--
+    @name               :   LandingPanel.html
+    @description        :   Template for Landing Panel
+    @note               :   Used in index.html
+    @author             :   Lin Yixiang, Leon
+-->
+
+<!-- stylesheets -->
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'webapp/css/LandingPanel.css' %}">
+
+<!-- template implementation -->
 <div class="jumbotron jumbotron-fluid panel landing-panel shadow" style="background-color: rgb(61, 123, 201)"></div>
-<!--
-<div class="jumbotron jumbotron-fluid panel landing-panel shadow" style="background-image: url('{% static 'webapp/assets/landing-screen-banner.jpg' %}')"></div> -->
 <div class="jumbotron jumbotron-fluid panel landing-panel-overlay shadow"></div>
 <div class="jumbotron jumbotron-fluid panel content-panel shadow">
     <div class="container content-panel-wrapper">
@@ -15,7 +21,7 @@
             <div class="row justify-content-center content-search-container">
                 <form method="GET" action="/webapp/search">
                     <div class="input-group input-group-lg content-search">
-                        <input type="text" name="q" class="form-control input-text-search" placeholder="Looking for restaurants? Or somewhere to dine?" autocomplete="off" />
+                        <input type="text" name="q" class="form-control input-text-search" placeholder="Looking for somewhere to dine?" autocomplete="off" />
                         <div class="input-group-append">
                             <input type="submit" class="btn btn-outline-secondary btn-search" value="Show Me" />
                         </div>

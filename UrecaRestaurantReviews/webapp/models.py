@@ -11,8 +11,20 @@ from django.core import serializers
     ## django automatically creates a PRIMARY KEY
     ## Unless required a customized PRIMARY KEY, consult django documentation
 
+# Relation : DiningCluster
+# Purpose  : Each sub areas may reside at a cluster (i.e. North Spine Plaza)
+class DiningCluster(models.Model):
+    # mandatory (to ease queries)
+    manager = models.Manager()
+
+    # attributes
+    name = models.CharField(max_length=255)
+    postal_code = models.IntegerField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
 # Relation : DiningSubArea
-# Purpose : Each dining area may belong to a region of campus
+# Purpose : Each dining area may belong to a class of food service outlet (i.e. North Spine Food Court)
 class DiningSubArea(models.Model):
     # mandatory (to ease queries)
     manager = models.Manager()
@@ -20,8 +32,11 @@ class DiningSubArea(models.Model):
     # attributes
     loc = models.CharField(max_length=255)
 
+    # foreign key constraints
+    cluster = models.ForeignKey(DiningCluster, on_delete=models.CASCADE)
+
 # Relation : DiningArea
-# Purpose : Relation for information of a DiningArea
+# Purpose : Relation for a DiningArea
 class DiningArea(models.Model):
     # mandatory (to ease queries)
     manager = models.Manager()
@@ -37,10 +52,6 @@ class DiningArea(models.Model):
 
     # foreign key constraints
     sub_loc = models.ForeignKey(DiningSubArea, on_delete=models.CASCADE)
-
-    # constraint(s) required
-        ## capacity needs to be > 0
-        ## dining_type needs to be 'Restaurant' or 'Food Court'
 
 # Relation : DiningAreaAssets
 # Purpose : Relation for assets (i.e. images) of a DiningArea 
@@ -93,6 +104,42 @@ class Review(models.Model):
 
     # foreign key constraints
     dining_area = models.ForeignKey(DiningArea, on_delete=models.CASCADE)
+
+# Relation : DishRecommendation
+# Purpose : Relation to store food recommendations of a dining area
+class DishRecommendation(models.Model):
+    # mandatory (to ease queries)
+    manager = models.Manager()
+
+    # attributes
+    score = models.IntegerField()
+
+    # foreign key constraints
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    dish = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    unique_together = ['review', 'dish']
+
+# Relation : Cuisine
+# Purpose : Relation for storing cuisines
+class Cuisine(models.Model):
+    # mandatory (to ease queries)
+    manager = models.Manager()
+
+    # attributes
+    name = models.CharField(max_length=255)
+
+# Relation : DiningAreaCuisine
+# Purpose : Relation for storing cuisines of a dining area
+class DiningAreaCuisine(models.Model):
+    # mandatory (to ease queries)
+    manager = models.Manager()
+
+    # foreign key constraints
+    dining_area = models.ForeignKey(DiningArea, on_delete=models.CASCADE)
+    cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
+    unique_together = ['dining_area', 'cuisine']
+
+
 
 
 

@@ -12,6 +12,7 @@ from django.db.models import Avg
 import json
 import decimal
 import math
+import base64
 
 class DecimalEncoder(json.JSONEncoder):
     def default(self, o):
@@ -22,6 +23,11 @@ class DecimalEncoder(json.JSONEncoder):
 class QueryManager:
     def topRatedDining(self):
         with connection.cursor() as cursor:
+            # Get all cluster
+            cursor.execute("SELECT * FROM webapp_diningcluster")
+            columns = [col[0] for col in cursor.description]
+            cluster = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
             # Restaurant
             cursor.execute("SELECT wd.id, wd.name, wd.imgurl, ws.loc as sub_loc, AVG(wr.score) as avg_score " + \
                         "FROM webapp_diningarea as wd " + \
@@ -43,6 +49,15 @@ class QueryManager:
                         "ORDER BY avg_score DESC LIMIT 3;")
             columns = [col[0] for col in cursor.description]
             food_court = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+            # Nearby Places (For Map)
+            cursor.execute("SELECT * " + \
+                        "FROM webapp_diningcluster as dc " + \
+                        "LEFT JOIN webapp_diningsubarea as dsa " + \
+                        "ON dc.id = dsa.cluster_id;")
+            columns = [col[0] for col in cursor.description]
+            nearby_places = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
         response = dict()
         response["restaurant"] = restaurant
         response["food_court"] = food_court
@@ -58,6 +73,18 @@ class QueryManager:
             response["food_court"][i]["score"] = list(range(response["food_court"][i]["avg_score"]))
             response["food_court"][i]["remainder_score"] = list(range(response["food_court"][i]["avg_score"]))
             del response["food_court"][i]["avg_score"]
+
+        nearby_places = list(filter(lambda obj : obj['cluster_id'] != None, nearby_places))
+        response['nearby_places'] = dict()     
+        for obj in nearby_places:
+            cluster_id = str(obj['cluster_id'])
+
+            if cluster_id not in response['nearby_places'].keys():
+                response['nearby_places'][cluster_id] = dict()
+                response['nearby_places'][cluster_id]['latitude'] = obj['latitude']
+                response['nearby_places'][cluster_id]['longitude'] = obj['longitude']
+                response['nearby_places'][cluster_id]['subarea'] = []
+            response['nearby_places'][cluster_id]['subarea'].append(obj['loc'])
 
         return response
     
@@ -115,7 +142,7 @@ class QueryManager:
                 restaurant["assets"] = list()
 
             # Menu
-            cursor.execute("SELECT wm.name, wm.price " + \
+            cursor.execute("SELECT wm.id, wm.name, wm.price " + \
                         "FROM webapp_diningarea as wd " + \
                         "INNER JOIN webapp_menu as wm ON wd.id = wm.dining_area_id " + \
                         "WHERE wd.id = %s " + \
@@ -125,14 +152,29 @@ class QueryManager:
             restaurant["menu"] = menuDict
 
             # Review
-            cursor.execute("SELECT wr.reviewer, wr.comment, wr.score " + \
+            cursor.execute("SELECT wr.id, wr.reviewer, wr.comment, wr.score, wm.name " + \
                         "FROM webapp_diningarea as wd " + \
                         "INNER JOIN webapp_review as wr ON wd.id = wr.dining_area_id " + \
+                        "LEFT JOIN webapp_dishrecommendation as dr ON wr.id = dr.review_id " + \
+                        "LEFT JOIN webapp_menu as wm ON wm.id = dr.dish_id " + \
                         "WHERE wd.id = %s " + \
                         "ORDER BY wr.date DESC;", [str(diningarea)])
             columns = [col[0] for col in cursor.description]
             reviewDict = [dict(zip(columns, row)) for row in cursor.fetchall()]
             restaurant["review"] = reviewDict
+
+            recommendList = dict()
+            for review in restaurant["review"]:
+                if review['id'] not in recommendList.keys():
+                    recommendList[review['id']] = {'id' : review['id'], 'reviewer' : review['reviewer'], 'comment' : review['comment'], 'score' : review['score'], 'dish' : []}
+                
+                if (review['name'] != None):
+                    recommendList[review['id']]['dish'].append(review['name'])
+            
+            formatList = list()
+            for review in recommendList.keys():
+                formatList.append(recommendList[review])
+            restaurant["review"] = formatList
 
             scoreCounter = [0, 0, 0, 0, 0]
             for i in range(len(restaurant["review"])):
@@ -167,11 +209,42 @@ class QueryManager:
             return (restaurant)
 
     def comment(self, comment): 
+        valid = True
         with connection.cursor() as cursor:
-            cursor.execute("INSERT INTO webapp_review (reviewer, comment, date, score, dining_area_id) " + \
-                        "VALUES (%s, %s, %s, %s, %s)", [comment['name'], comment['feedback'], \
-                        datetime.datetime.now(), comment['score'], comment['id']])
+            for obj in comment['like']:
+                cursor.execute("SELECT * " + \
+                            "FROM webapp_diningarea as wd " + \
+                            "INNER JOIN webapp_menu as wm ON wd.id = wm.dining_area_id " + \
+                            "WHERE wd.id = %s AND wm.id = %s ;", [int(comment['id']), int(obj)])
+                row = cursor.fetchall()
+                if (len(row) == 0):
+                    valid = False
 
+            for obj in comment['dislike']:
+                cursor.execute("SELECT * " + \
+                            "FROM webapp_diningarea as wd " + \
+                            "INNER JOIN webapp_menu as wm ON wd.id = wm.dining_area_id " + \
+                            "WHERE wd.id = %s AND wm.id = %s ;", [int(comment['id']), int(obj)])
+                row = cursor.fetchall()
+                if (len(row) == 0):
+                    valid = False
+
+            if (valid == True):
+                cursor.execute("INSERT INTO webapp_review (reviewer, comment, date, score, dining_area_id) " + \
+                            "VALUES (%s, %s, %s, %s, %s)", [comment['name'], comment['feedback'], \
+                            datetime.datetime.now(), comment['score'], comment['id']])
+                rowid = str(cursor.lastrowid)
+                
+                for obj in comment['like']:
+                    cursor.execute("INSERT INTO webapp_dishrecommendation (review_id, dish_id) " + \
+                            "VALUES (%s, %s)", [rowid, int(obj)])
+
+                for obj in comment['dislike']:
+                    cursor.execute("INSERT INTO webapp_dishrecommendation (review_id, dish_id) " + \
+                            "VALUES (%s, %s)", [rowid, int(obj)])   
+                
+
+# libraries
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
@@ -183,9 +256,11 @@ import datetime
 def index(request):
     template = loader.get_template('webapp/index.html')
     contextResponse = QueryManager().topRatedDining()
+
     context = {
         "restaurants" : contextResponse["restaurant"],
-        "food_courts" : contextResponse["food_court"]
+        "food_courts" : contextResponse["food_court"],
+        "nearby_places" : contextResponse["nearby_places"]
     }
     return HttpResponse(template.render(context, request))
 
@@ -225,9 +300,9 @@ def diningarea(request):
     return HttpResponse(json.dumps(QueryManager().diningarea(1), cls=DecimalEncoder), content_type="application/json")
 
 def menu(request):
-    # DiningSubArea
     return HttpResponse(json.dumps(QueryManager().topRatedDining(), cls=DecimalEncoder), content_type="application/json")
 
 def comment(request):
+    print(request.body)
     QueryManager().comment(json.loads(request.body))
     return HttpResponse({"response" : "200"})

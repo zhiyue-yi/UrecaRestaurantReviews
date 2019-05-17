@@ -1,4 +1,3 @@
-<!-- search.html -->
 {% extends "webapp/base.html" %}
 {% load static %}
 
@@ -11,6 +10,8 @@
 <div class="container-fluid container-search">
     <div class="container container-search-content">
         <h2 class="search-result-title">Displaying search result for <b>"{{ q }}"</b></h2>
+        
+        <!-- form for search criterias -->
         <div class="container container-search-refine-box">
             <form method="GET" action="/webapp/search">
                 <div class="form-row form-row-segment">
@@ -44,29 +45,14 @@
                 </div>
             </form>
         </div>
+
+        <!-- rendering search results -->
         <div class="container container-search-result-box">
             <div class="container grid-dining-card-group">
-                {% for restaurant in results %}
-                <a href="/webapp/loc/{{ restaurant.id }}">
-                    <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
-                        <img src={{ restaurant.imgurl }} class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title card-main-title">{{ restaurant.name }}</h5>
-                            <h5 class="card-title card-sub-title">{{ restaurant.sub_loc }}</h5>
-                            <p class="card-text card-rating">
-                                {% for star in restaurant.score %}
-                                    <i class="fas fa-star"></i>
-                                {% endfor %}
-                                {% for star in restaurant.remainder_score %}
-                                    <i class="far fa-star"></i>
-                                {% endfor %}
-                            </p>
-                        </div>
-                    </div>
-                </a>
-                {% endfor %}
+                {% include "webapp/component/Card.html" with grid_list=results %}
             </div>
         </div>
+
         <!-- omit for now
         <div class="container">
             <nav>

@@ -126,15 +126,22 @@ body{
     background-color: #3f51b5;
 }
 
-.foodplace-comment-text-box{
+.foodplace-comment-text-box, .foodplace-comment-dropdown-box{
     border-radius: 0px;
     border-width: 1px;
 }
 
-.foodplace-comment-text-box:focus{
+.foodplace-comment-text-box:focus, .foodplace-comment-dropdown-box:focus{
     box-shadow: none;
     outline: none;
     border-color: #3f51b5;
+}
+
+.foodplace-comment-dropdown-group{
+}
+
+.foodplace-comment-dropdown-box{
+    margin-bottom: 12px;
 }
 
 .foodplace-feedback-form-container{

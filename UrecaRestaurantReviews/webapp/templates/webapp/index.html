@@ -3,72 +3,69 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" type="text/css" href="{% static 'webapp/css/index.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+<link rel="stylesheet" href="{% static '/webapp/dist/css/leaflet.awesome-markers.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'webapp/css/Map.css' %}">
 {% endblock stylesheets %}
 
 {% block content %}
+    <!-- landing panel for index.html -->
     {% include "webapp/component/LandingPanel.html" %}
+
+    <!-- render an overview of all the food areas in NTU using maps -->
+    <div class="container-fluid grid-dining">
+        <div class="container grid-dining-header">
+            <h1 class="grid-dining-header-main">Explore Areas in NTU</h1>
+            <h2 class="grid-dining-header-sub">Providing you the one-stop food portal in NTU</h2>
+        </div>
+        <div class="container grid-dining-card-group">
+            <div id="mapdiv" style="height: 500px;"></div>
+            <div class="container map-header-group">
+                <h1 class="map-header-main">Nearby Dining Areas</h1>
+            </div>
+            <div class="container map-result-container">
+                <ul class="map-result-list" id="map-result-list">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- render a list of popular restaurants in NTU -->
     <div class="container-fluid grid-dining">
         <div class="container grid-dining-header">
             <h1 class="grid-dining-header-main">Restaurants in NTU</h1>
             <h2 class="grid-dining-header-sub">Browse through a comprehensive list of available restaurants</h2>
         </div>
-        <div class="container grid-dining-card-group">
-            {% for restaurant in restaurants %}
-                <a href="/webapp/loc/{{ restaurant.id }}">
-                    <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
-                        <img src={{ restaurant.imgurl }} class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title card-main-title">{{ restaurant.name }}</h5>
-                            <h5 class="card-title card-sub-title">{{ restaurant.sub_loc }}</h5>
-                            <p class="card-text card-rating">
-                                {% for star in restaurant.score %}
-                                    <i class="fas fa-star"></i>
-                                {% endfor %}
-                                {% for star in restaurant.remainder_score %}
-                                    <i class="far fa-star"></i>
-                                {% endfor %}
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
+        {% include "webapp/component/Card.html" with grid_list=restaurants %}
         <div class="container grid-dining-more-link-container">
             <div class="row justify-content-center">
-                <a class="grid-dining-more-link" href="/webapp/search?q=Restaurant">View Restaurants <i class="fas fa-arrow-right"></i></a>
+                <a class="grid-dining-more-link" href="/webapp/search?q=Restaurant">
+                    View Restaurants <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>
+
+    <!-- render a list of popular food court stalls in NTU -->
     <div class="container-fluid grid-dining">
         <div class="container grid-dining-header">
             <h1 class="grid-dining-header-main">Food Court in NTU</h1>
             <h2 class="grid-dining-header-sub">Alternatively, find a food court outlet to dine in</h2>
         </div>
-        <div class="container grid-dining-card-group">
-            {% for foodcourt in food_courts %}
-                <a href="/webapp/loc/{{ foodcourt.id }}">
-                    <div class="card grid-dining-card col-lg-4 col-md-6 col-sm-12 shadow-sm">
-                        <img src={{ foodcourt.imgurl }} class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title card-main-title">{{ foodcourt.name }}</h5>
-                            <h5 class="card-title card-sub-title">{{ foodcourt.sub_loc }}</h5>
-                            <p class="card-text card-rating">
-                                {% for star in foodcourt.score %}
-                                    <i class="fas fa-star"></i>
-                                {% endfor %}
-                                {% for star in foodcourt.remainder_score %}
-                                    <i class="far fa-star"></i>
-                                {% endfor %}
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
+        {% include "webapp/component/Card.html" with grid_list=food_courts %}
         <div class="container grid-dining-more-link-container">
             <div class="row justify-content-center">
-                <a class="grid-dining-more-link" href="/webapp/search?q=Food+Court">View Food Courts Outlet <i class="fas fa-arrow-right"></i></a>
+                <a class="grid-dining-more-link" href="/webapp/search?q=Food+Court">
+                    View Food Courts Outlet <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>
 {% endblock content %}
+
+{% block scripts %}
+<script src="https://cdn.onemap.sg/leaflet/onemap-leaflet.js"></script>
+<script src="{% static '/webapp/dist/js/leaflet.awesome-markers.js' %}"></script>
+{{ nearby_places|json_script:"nearby_places-data" }}
+<script src="{% static '/webapp/js/map.js' %}"></script>
+{% endblock scripts %}
