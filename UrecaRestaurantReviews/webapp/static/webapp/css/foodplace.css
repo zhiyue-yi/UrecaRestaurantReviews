@@ -190,7 +190,6 @@ body{
 
 .foodplace-comment{
     padding-top: 25px;
-    padding-bottom: 25px;
     border-bottom-width: 1px;
     border-bottom-color: #EEEEEE;
     border-bottom-style: solid;
@@ -200,14 +199,43 @@ body{
     border: none;
 }
 
-.comment-timestamp{
-    font-size: 0.8em;
+.comment-owner{
+    font-size: 1.2em;
     font-weight: 300;
+    color: #616161;
+    padding-bottom: 5px;
+}
+
+.comment-date{
+    font-size: 1.05em;
+    font-weight: 300;
+    color: #616161;
+    padding-bottom: 10px;
+}
+
+.comment-rating{
+    font-size: 1.0em;
+}
+
+.comment-recommendation-group{
+    padding: 5px 0px 5px 0px;
+}
+
+.recommendation-section-header{
+    font-size: 1.15em;
+    font-weight: 400;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.recommendation-dish{
+    list-style: none;
+    font-size: 1.05em;
     color: #616161;
 }
 
 .comment-body{
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 300;
 }
 

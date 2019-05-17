@@ -152,7 +152,7 @@ class QueryManager:
             restaurant["menu"] = menuDict
 
             # Review
-            cursor.execute("SELECT wr.id, wr.reviewer, wr.comment, wr.score, wm.name " + \
+            cursor.execute("SELECT wr.id, wr.reviewer, wr.comment, wr.score, wr.date, dr.score as dish_score, wm.name " + \
                         "FROM webapp_diningarea as wd " + \
                         "INNER JOIN webapp_review as wr ON wd.id = wr.dining_area_id " + \
                         "LEFT JOIN webapp_dishrecommendation as dr ON wr.id = dr.review_id " + \
@@ -166,11 +166,17 @@ class QueryManager:
             recommendList = dict()
             for review in restaurant["review"]:
                 if review['id'] not in recommendList.keys():
-                    recommendList[review['id']] = {'id' : review['id'], 'reviewer' : review['reviewer'], 'comment' : review['comment'], 'score' : review['score'], 'dish' : []}
+                    date = str('{:02d}'.format(review['date'].day)) + "/" + str('{:02d}'.format(review['date'].month)) + "/" + str(review['date'].year)
+                    recommendList[review['id']] = {'id' : review['id'], 'reviewer' : review['reviewer'], 'date' : date, 'comment' : review['comment'], 'score' : review['score'], 'likes' : [], 'dislikes' : []}
                 
                 if (review['name'] != None):
-                    recommendList[review['id']]['dish'].append(review['name'])
+                    if (review['dish_score'] == 0):
+                        recommendList[review['id']]['dislikes'].append(review['name'])
+                    else:
+                        recommendList[review['id']]['likes'].append(review['name'])
             
+            print(recommendList)
+
             formatList = list()
             for review in recommendList.keys():
                 formatList.append(recommendList[review])
@@ -236,12 +242,12 @@ class QueryManager:
                 rowid = str(cursor.lastrowid)
                 
                 for obj in comment['like']:
-                    cursor.execute("INSERT INTO webapp_dishrecommendation (review_id, dish_id) " + \
-                            "VALUES (%s, %s)", [rowid, int(obj)])
+                    cursor.execute("INSERT INTO webapp_dishrecommendation (review_id, dish_id, score) " + \
+                            "VALUES (%s, %s, %s)", [rowid, int(obj), 1])
 
                 for obj in comment['dislike']:
-                    cursor.execute("INSERT INTO webapp_dishrecommendation (review_id, dish_id) " + \
-                            "VALUES (%s, %s)", [rowid, int(obj)])   
+                    cursor.execute("INSERT INTO webapp_dishrecommendation (review_id, dish_id, score) " + \
+                            "VALUES (%s, %s, %s)", [rowid, int(obj), 0])   
                 
 
 # libraries

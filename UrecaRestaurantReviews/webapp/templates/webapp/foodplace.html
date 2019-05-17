@@ -262,7 +262,10 @@
                     {% for review in restaurant.review %}
                         <div class="media foodplace-comment">
                             <div class="media-body">
-                                <h5 class="mt-0">
+                                <h5 class="mt-0 comment-owner">
+                                    <b>{{ review.reviewer }}</b>
+                                </h5>
+                                <h5 class="mt-0 comment-rating">
                                     {% for i in review.star_score %}
                                         <i class="fa fa-star"></i>
                                     {% endfor %}
@@ -270,7 +273,32 @@
                                         <i class="far fa-star"></i>
                                     {% endfor %}
                                 </h5>
-                                <h5 class="mt-0 comment-timestamp">by <b>{{ review.reviewer }}</b></h5>
+                                <h5 class="mt-0 comment-date">
+                                    {{ review.date }}
+                                </h5>
+                                <div class="container comment-recommendation-group">
+                                    {% if review.likes|length > 0 %}
+                                        <h1 class="recommendation-section-header" style="color:#2e7d32;">
+                                            <i class="fas fa-plus"></i> Likes
+                                        </h1>
+                                        <ul class="recommendation-dish">
+                                            {% for item in review.likes %}
+                                                <li class="recommendation-dish-item">{{ item }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+
+                                    {% if review.dislikes|length > 0 %}
+                                        <h1 class="recommendation-section-header" style="color:#c62828;">
+                                            <i class="fas fa-minus"></i> Dislikes
+                                        </h1>
+                                        <ul class="recommendation-dish">
+                                            {% for item in review.dislikes %}
+                                                <li class="recommendation-dish-item">{{ item }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </div>
                                 <p class="comment-body">
                                     {{ review.comment }}
                                 </p>
