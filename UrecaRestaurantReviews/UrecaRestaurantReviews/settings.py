@@ -25,7 +25,11 @@ SECRET_KEY = 'ti17t=1$dkra)m@(6pko2y_4s25^8^c5epawsl8i*baw0-fld^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',  # LocalHost
+    '10.0.2.2'  # Flutter app local
+]
 
 
 # Application definition

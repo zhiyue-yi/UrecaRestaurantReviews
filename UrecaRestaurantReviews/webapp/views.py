@@ -9,6 +9,7 @@
 import webapp.models as model
 from django.db import models
 from django.db.models import Avg
+from django.views.decorators.csrf import csrf_exempt
 import json
 import decimal
 import math
@@ -302,8 +303,8 @@ def loc(request, diningarea_id):
 def toprated(request):
     return HttpResponse(json.dumps(QueryManager().topRatedDining(), cls=DecimalEncoder), content_type="application/json")
 
-def diningarea(request):
-    return HttpResponse(json.dumps(QueryManager().diningarea(1), cls=DecimalEncoder), content_type="application/json")
+def diningarea(request, id):
+    return HttpResponse(json.dumps(QueryManager().diningarea(id), cls=DecimalEncoder), content_type="application/json")
 
 def menu(request):
     return HttpResponse(json.dumps(QueryManager().topRatedDining(), cls=DecimalEncoder), content_type="application/json")
@@ -312,3 +313,12 @@ def comment(request):
     print(request.body)
     QueryManager().comment(json.loads(request.body))
     return HttpResponse({"response" : "200"})
+
+@csrf_exempt
+def feedback(request):
+    print(request.body)
+    QueryManager().comment(json.loads(request.body))
+    return HttpResponse({"response" : "200"})
+
+def query(request, keyword):
+    return HttpResponse(json.dumps(QueryManager().search(keyword), cls=DecimalEncoder), content_type="application/json")
